@@ -1,0 +1,3 @@
+robotframework==6.0.2
+
+# You may have to add more libraries

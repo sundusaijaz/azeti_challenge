@@ -1,0 +1,39 @@
+version: '2'
+services:
+  server:
+    build:
+      context: server
+    #ports:  #You can uncomment this to help you to debug
+    #  - "5080:80"
+    depends_on:
+      - mqtt-broker
+
+  mqtt-broker:
+    image: eclipse-mosquitto:1.6
+    hostname: mosquitto
+    #ports:  #You can uncomment this to help you to debug
+    #  - "1883:1883"
+    volumes:
+      - mosquitto-data:/mosquitto/data
+      - mosquitto-logs:/mosquitto/logs
+      - mosquitto-conf:/mosquitto/config
+
+  client:
+    build:
+      context: client
+    depends_on:
+      - mqtt-broker
+      - server
+
+  rf-test:
+    build:
+      context: rf_test
+    depends_on:
+      - server
+    volumes:
+      - ./results:/usr/src/app/results
+
+volumes:
+  mosquitto-data:
+  mosquitto-logs:
+  mosquitto-conf:
