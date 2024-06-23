@@ -28,7 +28,8 @@ def initialize_database_connection():
     # This will mock a connection to a database and do other intermediary
     # tasks. Depending on the servers "load", it may take more or less time.
     print('Starting Database connection')
-    sleep(random.randint(5, 60))  # A complex initialization, as you can see...
+    #sleep(random.randint(5, 60))  # A complex initialization, as you can see...
+    sleep(2)
     print('Database connection established')
 
 
@@ -109,6 +110,7 @@ def main():
     def get_secret():
         if original_secret == user_set_secret:
             return 'YES'
+        print(original_secret,user_set_secret,'NO')
         return 'NO', 409
 
     @app.route("/ready", methods=['GET'])
@@ -118,6 +120,7 @@ def main():
     rest_server = Thread(target=app.run,
                          args=('0.0.0.0', 80, False, False),
                          daemon=True)
+    
     rest_server.start()
 
     mqtt_sender = Thread(target=send_secret)
