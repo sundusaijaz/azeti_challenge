@@ -66,6 +66,7 @@ def main():
     original_secret = random.randint(1, 100)
 
     mqtt_client = connect_mqtt()
+    print('SERVER MQTT',mqtt_client)
     mqtt_connection_event.wait()
 
     app = Flask(__name__)

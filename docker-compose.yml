@@ -4,7 +4,7 @@ services:
     build:
       context: server
     ports:  
-      - "5080:5080"
+      - "5080:80"
     depends_on:
       - mqtt-broker
 
@@ -17,19 +17,22 @@ services:
       - mosquitto-data:/mosquitto/data
       - mosquitto-logs:/mosquitto/logs
       - mosquitto-conf:/mosquitto/config
-
+    
   client:
     build:
       context: client
     depends_on:
       - mqtt-broker
       - server
+    network_mode: "host"
+
 
   rf-test:
     build:
       context: rf_test
     depends_on:
       - server
+    network_mode: "host"
     volumes:
       - ./results:/usr/src/app/results
 
