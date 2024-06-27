@@ -1,11 +1,9 @@
 #!/usr/bin/env sh
 
-# URL of your server's readiness endpoint
 SERVER_URL="http://0.0.0.0:5080/ready"
 
 # Maximum number of attempts to check the server readiness
 MAX_ATTEMPTS=100
-
 
 wait_for_server_ready() {
     local url=$1
