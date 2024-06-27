@@ -3,16 +3,16 @@ services:
   server:
     build:
       context: server
-    ports:  
-      - "5080:80"
+    #ports:  
+     # - "5080:80"
     depends_on:
       - mqtt-broker
 
   mqtt-broker:
     image: eclipse-mosquitto:1.6
     hostname: mosquitto
-    ports:  
-      - "1883:1883"
+    #ports:  
+     # - "1883:1883"
     volumes:
       - mosquitto-data:/mosquitto/data
       - mosquitto-logs:/mosquitto/logs
@@ -25,7 +25,6 @@ services:
       - mqtt-broker
       - server
     network_mode: "host"
-
 
   rf-test:
     build:

@@ -28,8 +28,7 @@ def initialize_database_connection():
     # This will mock a connection to a database and do other intermediary
     # tasks. Depending on the servers "load", it may take more or less time.
     print('Starting Database connection')
-    #sleep(random.randint(5, 60))  # A complex initialization, as you can see...
-    sleep(2)
+    sleep(random.randint(5, 60))  # A complex initialization, as you can see...
     print('Database connection established')
 
 
@@ -66,7 +65,6 @@ def main():
     original_secret = random.randint(1, 100)
 
     mqtt_client = connect_mqtt()
-    print('SERVER MQTT',mqtt_client)
     mqtt_connection_event.wait()
 
     app = Flask(__name__)
